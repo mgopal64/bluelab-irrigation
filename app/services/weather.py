@@ -1,0 +1,1 @@
+# Calls Open-Meteo API to get weather forecasts and ET_0.
