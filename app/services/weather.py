@@ -94,5 +94,3 @@ def create_features(df):
 #         sp.to_csv("app/data/running_soil_precipitation.csv", mode='a', header=False, index=True)
 #     if et0.index > et0_df.tail(1).index:
 #         sp.to_csv("app/data/running_et0_values.csv", mode='a', header=False, index=True)
-
-api_call()
