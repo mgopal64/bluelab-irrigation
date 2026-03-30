@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import weather as w
+import model_inference as model
 
 # function for predicting if we should water
 def should_we_water():
@@ -8,6 +9,9 @@ def should_we_water():
     # makes api call to open_meteo
     w.api_call()
     
+    # make predictions
+    model.predict_soil_moisture()
+
     # thresholds
     sm_threshold = 0.285
     et0_threshold = 5.0
