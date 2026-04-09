@@ -18,28 +18,34 @@ twilio_secret = os.environ.get('TWILIO_SECRET')
 twilio_account = os.environ.get('TWILIO_ACC')
 client = Client(twilio_key, twilio_secret, twilio_account)
 
-def send_alert(message,type, moisture_val, et):
-    if type == "permission":
+def send_alert(content_body,alert_type, moisture_val, et):
+    if alert_type == "permission":
         message = client.messages.create(
             body= "Do you want to water Willow Run Acres? Reply \"YES\" or \"NO\"",
             from_="+18445023045",
             to="+18505599011",
         )
-    elif type == "startIrrigation":
+    elif alert_type == "startIrrigation":
         message = client.messages.create(
-            body= "Valve opened, soil at 24%, ETA 4.2 mm/day':" + message,
+            body= "Valve opened, soil at " + str(moisture_val) + "%, ETA " + str(et) + " mm/day:" + content_body,
             from_="+18445023045",
             to="+18505599011",
         )
-    elif type == "offlineSensor":
+    elif alert_type == "offlineSensor":
         message = client.messages.create(
-            body= "The sensor went offline at " + message,
+            body= "The sensor went offline at " + content_body,
             from_="+18445023045",
             to="+18505599011",
         )
-    elif type == "systemerror":
+    elif alert_type == "systemerror":
         message = client.messages.create(
-            body= "There was a system error:" + message,
+            body= "There was a system error:" + content_body,
+            from_="+18445023045",
+            to="+18505599011",
+        )
+    else:
+        message = client.messages.create(
+            body= "Message:" + content_body,
             from_="+18445023045",
             to="+18505599011",
         )
